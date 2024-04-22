@@ -1,7 +1,9 @@
 # CS429_IR_Final
 Final Project Information Retrieval system for CS429
 
-Project Report PDF at Project Report mmednis.pdf
+**Project Report PDF at Project Report mmednis.pdf**
+
+**https://github.com/tissoSmelly/CS429_IR_Final/blob/main/Project%20Report%20mmednis.pdf**
 
 Project Report
 
