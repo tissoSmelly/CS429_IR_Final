@@ -1,6 +1,6 @@
 ### reads in the HTML files read by the crawler existing at the provided directory
 ### then generates the inverted index as tf-idf scores
-### writes the inverted index to a .pkl file with name dependent on original directory
+### writes the inverted index to a .pkl file with name defined with output_pickle_file
 
 from bs4 import BeautifulSoup
 import os
@@ -8,9 +8,7 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import defaultdict
 
-domain = 'iit.edu' ### maybe make reference to other script - crawler to help it all flow without hard coding
-### the above domain must be the same as the first element of allowed_domains in the ir_crawler\spiders\crawler.py script
-
+html_dir_file_path = 'ir_crawler/directory_iit.edu' ## hard code directory of html files
 def build_inverted_index(dir):
     print("Begin Building Inverted Index")
     print(f"Reading in .html files from Directory: {dir}")
@@ -21,7 +19,6 @@ def build_inverted_index(dir):
     for file_name in os.listdir(dir):
         if file_name.endswith('.html'): ## read all .html
             file_path = os.path.join(dir, file_name)
-            #print(f"Reading in {file_path}")
             with open(file_path, 'r', encoding='utf-8') as f:
                 html_content = f.read()
                 soup = BeautifulSoup(html_content, 'html.parser')
@@ -47,15 +44,12 @@ def build_inverted_index(dir):
     inverted_index = defaultdict(dict)
 
     terms = vectorizer.get_feature_names_out() ## gets list of all terms
-    #print(f"Number of terms {len(terms)}")
     for term_index, term in enumerate(terms):
-        #print(f"term num {term_index}")
         for doc_index in range(len(documents)):
             tfidf_score = tfidf_matrix[doc_index, term_index]
             if tfidf_score > 0: ## if score is zero - toss it
                 ### create tf-idf score for given term and doc pair or append to list already there
                 inverted_index[term][file_paths[doc_index]] = tfidf_score
-    #print(dict(inverted_index))
     print("Done building inverted index")
 
     return dict(inverted_index)
@@ -73,8 +67,9 @@ if __name__ == '__main__':
 
     ## defines the expected html directory name and the output index file name
     #### based on the domain defined above which should be same as defined in the crawler allowed_domains attribute
-    html_directory = f'ir_crawler/directory_{domain}'
-    output_pickle_file = f'{domain}_inverted_index.pkl'
+
+    html_directory = html_dir_file_path
+    output_pickle_file = f'iit.edu_inverted_index.pkl' ## change if the html directory changes
 
     inverted_index = build_inverted_index(html_directory)
     save_inverted_index(inverted_index, output_pickle_file)
