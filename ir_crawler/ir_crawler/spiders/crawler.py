@@ -48,16 +48,7 @@ class CrawlerSpider(scrapy.Spider):
         if not os.path.exists(output_directory): ## if it doesn't exist yet we make it
             os.makedirs(output_directory)
 
-        #og_url = response.css('meta[property="og:url"]::attr(content)').get() ## gets full URL for filename
-
-        #if not og_url: ## if
-        #    og_url = self.logger.info(f'Found Open Graph URL: {og_url}')
-            # You can further process the extracted og_url here
-        #else:
-        #    self.logger.info('Open Graph URL not found in the response')
-
         filename = os.path.join(output_directory, f'page_{response.url.split("/")[-1]}.html')
-        #filename = os.path.join(output_directory, f'page_{og_url.split("/")[-1]}.html')
 
         # write response content to file in the directory
         with open(filename, 'wb') as f:
