@@ -1,6 +1,8 @@
 # CS429_IR_Final
 Final Project Information Retrieval system for CS429
 
+Project Report: https://github.com/tissoSmelly/CS429_IR_Final/blob/main/Project%20Report%20mmednis.pdf
+
 **HOW TO RUN QUERIES SIMPLY**
 
 1. Clone Repo
