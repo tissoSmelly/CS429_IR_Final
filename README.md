@@ -9,3 +9,6 @@ Final Project Information Retrieval system for CS429
 4. Data POSTED must follow JSON format as follows {"Query": "this is my example query", "K": 10}
 5. You will receive ranked results from the default index set in flask_app.py source code
 NOTE: JSON is case-sensitive 
+
+
+I hope this all works on your system
